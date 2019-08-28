@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 06:28:59 by jhouston          #+#    #+#             */
-/*   Updated: 2019/08/28 07:31:47 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:54:33 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,78 @@ struct			mine {
 	struct mine	*next;
 };
 
+int cDtO(int decimalNumber)
+{
+    int octalNumber;
+	int	i;
+
+	i = 1;
+	octalNumber = 0;
+    while (decimalNumber != 0)
+    {
+        octalNumber += (decimalNumber % 8) * i;
+        decimalNumber /= 8;
+        i *= 10;
+    }
+    return (octalNumber);
+}
+
+int	*octarr(int oct)
+{
+	int *retarr;
+	int i;
+
+	i = ft_intlen(oct);
+	retarr = (int *)malloc(1);
+	while (oct >= 1)
+	{
+		retarr[i] = (oct % 10);
+		i--;
+		oct /= 10;
+	}
+	return (retarr);
+}
+
+void	putperms(int mode)
+{
+	int *num;
+	int i;
+
+	i = 0;
+	num = (octarr(cDtO(mode)));
+	while (i <= 5)
+	{
+		ft_putnbr(num[i]);
+		i++;
+	}
+/*	if (num[0] == 4)
+		ft_putstr("-r");	*/
+}
+
 void			putmodes(char *path)
 {
 	register struct passwd	*pwd;
 	register uid_t			user;
-	struct	stat			buff;
-	int						links;
+	register mode_t			mode;
+	struct stat				buff;
 	struct timespec			time;
 	char					*time2;
+	int						links;
 	int						size;
 
 	stat(path, &buff);
+	mode = buff.st_mode;
 	links = buff.st_nlink;
 	time = buff.st_mtimespec;
 	size = buff.st_size;
 	user = geteuid();
 	pwd = getpwuid(user);
-	ft_putnbr(links);
-	ft_putchar('\t');
-	ft_putstr(pwd->pw_name);
-	ft_putchar('\t');
-	ft_putnbr(size);
-	ft_putchar('\t');
+	putperms(mode);
+	ft_putnbr_t(links);
+	ft_putstr_t(pwd->pw_name);
+	ft_putnbr_t(size);
 	time2 = ctime(&time.tv_sec);
-	ft_putstr(ft_strcreturn(time2, '\n', 0));
-	ft_putchar('\t');
+	ft_putstr_t(ft_strcreturn(time2, '\n', 0));
 }
 
 void	l_flag(DIR *dir, struct mine loop, struct dirent *had)
@@ -59,7 +106,6 @@ void	l_flag(DIR *dir, struct mine loop, struct dirent *had)
 		loop.data = had->d_name;
 		if (loop.data[0] != '.')
 		{
-			ft_putstr("-");
 			putmodes(loop.data);
 			ft_putendl(loop.data);
 		}
@@ -110,21 +156,18 @@ void	no_flags(DIR *dir, struct mine loop, struct dirent *had)
 	{
 		loop.data = had->d_name;
 		if (loop.data[0] != '.')
-		{
-			ft_putstr(had->d_name);
-			ft_putchar('\t');
-		}
+			ft_putendl(loop.data);
 		no_flags(dir, loop, had);
 	}
 }
 
 void	a_flags(DIR *dir, struct mine loop, struct dirent *had)
 {
-	while ((had = readdir(dir)) != NULL)
+	if ((had = readdir(dir)) != NULL)
 	{
 		loop.data = had->d_name;
-		ft_putstr(loop.data);
-		ft_putchar('\t');
+		ft_putendl(loop.data);
+		a_flags(dir, loop, had);
 	}
 }
 

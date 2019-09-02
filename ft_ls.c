@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 06:28:59 by jhouston          #+#    #+#             */
-/*   Updated: 2019/08/28 18:54:33 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/02 13:51:04 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	*octarr(int oct)
 	int *retarr;
 	int i;
 
-	i = ft_intlen(oct);
-	retarr = (int *)malloc(1);
+	i = ft_intlen(cDtO(oct));
+	retarr = (int *)malloc(sizeof(int) * i);
 	while (oct >= 1)
 	{
 		retarr[i] = (oct % 10);
@@ -64,13 +64,13 @@ void	putperms(int mode)
 
 	i = 0;
 	num = (octarr(cDtO(mode)));
-	while (i <= 5)
+	while (i < 5)
 	{
 		ft_putnbr(num[i]);
 		i++;
 	}
-/*	if (num[0] == 4)
-		ft_putstr("-r");	*/
+/*	if (num[1] == 4)
+		ft_putstr("-r");  */
 }
 
 void			putmodes(char *path)
@@ -91,12 +91,12 @@ void			putmodes(char *path)
 	size = buff.st_size;
 	user = geteuid();
 	pwd = getpwuid(user);
-	putperms(mode);
 	ft_putnbr_t(links);
 	ft_putstr_t(pwd->pw_name);
 	ft_putnbr_t(size);
 	time2 = ctime(&time.tv_sec);
 	ft_putstr_t(ft_strcreturn(time2, '\n', 0));
+	putperms(mode);
 }
 
 void	l_flag(DIR *dir, struct mine loop, struct dirent *had)
@@ -175,20 +175,20 @@ int		main(int argc, char **argv)
 {
 	struct dirent	*dir;
 	struct mine		pole;
-	DIR				*asd;
+	DIR				*folder;
 
 	(void)argc;
 	pole.data = NULL;
 	dir = NULL;
-	asd = opendir(".");
+	folder = opendir(".");
 	if (argv[1] == NULL)
-		no_flags(asd, pole, dir);
+		no_flags(folder, pole, dir);
 	else if (ft_strcmp(argv[1], "-a") == 0)
-			a_flags(asd, pole, dir);
+			a_flags(folder, pole, dir);
 	else if (ft_strcmp(argv[1], "-l") == 0)
-			l_flag(asd, pole, dir);
+			l_flag(folder, pole, dir);
 	else if (ft_strcmp(argv[1], "-R") == 0)
-			R_flag(asd, pole, dir, 0);
-	closedir(asd);
+			R_flag(folder, pole, dir, 0);
+	closedir(folder);
 	return (0);
 }

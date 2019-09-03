@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 06:28:59 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/02 20:02:00 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:53:23 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <pwd.h>
 #include <uuid/uuid.h>
 #include <time.h>
+
+#define BIT_ACTIVE(FLAGS, BIT) ((FLAGS >> BIT) & 1)
+#define	SET_BIT(FLAGS, BIT) (FLAGS |= (1 << BIT))
 
 struct			mine {
 	char		*data;
@@ -47,7 +50,7 @@ int	*octarr(int oct)
 	int i;
 
 	i = ft_intlen(cDtO(oct));
-	retarr = (int *)malloc(90); //sizeof(int) * i);
+	retarr = (int *)malloc(sizeof(int) * i);
 	while (oct >= 1)
 	{
 		retarr[i] = (oct % 10);
@@ -69,6 +72,7 @@ void	putperms(int mode)
 		ft_putnbr(num[i]);
 		i++;
 	}
+	ft_putchar('\t');
 /*	if (num[1] == 4)
 		ft_putstr("-r");  */
 }
@@ -91,7 +95,7 @@ void			putmodes(char *path)
 	size = buff.st_size;
 	user = geteuid();
 	pwd = getpwuid(user);
-	putperms(mode);
+//	putperms(mode);
 	ft_putnbr_t(links);
 	ft_putstr_t(pwd->pw_name);
 	ft_putnbr_t(size);
@@ -170,44 +174,69 @@ void	a_flags(DIR *dir, struct mine loop, struct dirent *had)
 		a_flags(dir, loop, had);
 	}
 }
-/*
-int	scan_options(int max, char **dkfn)
+
+int	scan_options(int max, char **flags)
 {
 	int i;
 	int j;
-	int flags;
+	int check;
 
 	i = 1;
-	flags = 0;
-	while (i < argc)
+	check = 0;
+	while (i < max)
 	{
 		j = 0;
-		if (argv[i][0] == '-')
+		if (flags[i][0] == '-')
 		{
-			
+			if (flags[i][j + 1] != '\0')
+			while (flags[i][j])
+			{
+				SET_BIT(check, (flags[i][j] - 'a'));
+				j++;
+			}
+			else
+			{
+				ft_putstr("Invalid Flag Input '-'");
+				return (0);
+			}
 		}
-
+		else
+		{
+			ft_putstr("Invalid Flag Input "); 
+			ft_putchar('\'');
+			ft_putchar(flags[i][j]);
+			ft_putstr("\'\n");
+			ft_putstr("Did you mean -");
+			ft_putchar(flags[i][j]);
+			ft_putchar('?');
+			ft_putchar('\n');
+			return (0);
+		}
+		i++;
 	}
+	return (check);
 }
-*/
+
 int		main(int argc, char **argv)
 {
 	struct dirent	*dir;
 	struct mine		pole;
 	DIR				*folder;
+	int				flags;
 
-	(void)argc;
 	pole.data = NULL;
 	dir = NULL;
 	folder = opendir(".");
+	flags = scan_options(argc, argv);
 	if (argv[1] == NULL)
 		no_flags(folder, pole, dir);
-	else if (ft_strcmp(argv[1], "-a") == 0)
+	if (BIT_ACTIVE(flags, ('a' - 'a')))
 			a_flags(folder, pole, dir);
-	else if (ft_strcmp(argv[1], "-l") == 0)
+	else if (BIT_ACTIVE(flags, ('l' - 'a')))
 			l_flag(folder, pole, dir);
-	else if (ft_strcmp(argv[1], "-R") == 0)
+	else if (BIT_ACTIVE(flags, ('R' - 'A')))
 			R_flag(folder, pole, dir, 0);
 	closedir(folder);
 	return (0);
 }
+

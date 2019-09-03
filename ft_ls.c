@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 06:28:59 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/02 13:51:04 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/02 20:02:00 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	*octarr(int oct)
 	int i;
 
 	i = ft_intlen(cDtO(oct));
-	retarr = (int *)malloc(sizeof(int) * i);
+	retarr = (int *)malloc(90); //sizeof(int) * i);
 	while (oct >= 1)
 	{
 		retarr[i] = (oct % 10);
@@ -91,12 +91,12 @@ void			putmodes(char *path)
 	size = buff.st_size;
 	user = geteuid();
 	pwd = getpwuid(user);
+	putperms(mode);
 	ft_putnbr_t(links);
 	ft_putstr_t(pwd->pw_name);
 	ft_putnbr_t(size);
 	time2 = ctime(&time.tv_sec);
 	ft_putstr_t(ft_strcreturn(time2, '\n', 0));
-	putperms(mode);
 }
 
 void	l_flag(DIR *dir, struct mine loop, struct dirent *had)
@@ -170,7 +170,26 @@ void	a_flags(DIR *dir, struct mine loop, struct dirent *had)
 		a_flags(dir, loop, had);
 	}
 }
+/*
+int	scan_options(int max, char **dkfn)
+{
+	int i;
+	int j;
+	int flags;
 
+	i = 1;
+	flags = 0;
+	while (i < argc)
+	{
+		j = 0;
+		if (argv[i][0] == '-')
+		{
+			
+		}
+
+	}
+}
+*/
 int		main(int argc, char **argv)
 {
 	struct dirent	*dir;

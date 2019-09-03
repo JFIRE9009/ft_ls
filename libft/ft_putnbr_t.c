@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_medel.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_t.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 10:12:07 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/03 13:49:22 by jhouston         ###   ########.fr       */
+/*   Created: 2019/09/03 13:55:11 by jhouston          #+#    #+#             */
+/*   Updated: 2019/09/03 13:57:38 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+void	ft_putnbr_t(int n)
 {
-	if (!ap)
-		return ((void)NULL);
-	free(*ap);
-	*ap = NULL;
+	ft_putnbr(n);
+	ft_putchar('\t');
 }

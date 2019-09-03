@@ -6,14 +6,31 @@
 #    By: jhouston <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/02 13:22:47 by jhouston          #+#    #+#              #
-#    Updated: 2019/09/02 13:39:35 by jhouston         ###   ########.fr        #
+#    Updated: 2019/09/03 17:15:19 by jhouston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#CC = gcc -o ft_ls
+NAME= lib_ls.a
+ACC= gcc -c
+CC = gcc -o ft_ls
 FLAGS = -Wall -Wextra -Werror
-FILES= ft_ls.c
+FILES= ./srcs/*.c
+OBJ= *.o
 LIBFT= libft/libft.a
+LIB= lib_ls.h
 
-all:
+all: $(NAME)
+
+$(NAME):
+	$(ACC) $(FILES) $(FLAGS)
+	ar rv $(NAME) $(OBJ) $(LIB)
+	ranlib $(NAME)
+	rm -f $(OBJ)
+
+compile:
 	$(CC) $(FILES) $(LIBFT) $(FLAGS)
+
+
+clean:
+	rm -f $(NAME)
+re: clean all

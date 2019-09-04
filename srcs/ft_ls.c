@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 06:28:59 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/03 17:14:26 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/04 13:59:20 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int		main(int argc, char **argv)
 	flags = scan_options(argc, argv);
 	if (argv[1] == NULL)
 		no_flags(folder, pole, dir);
-	if (BIT_ACTIVE(flags, ('a' - 'a')))
-			a_flag(folder, pole, dir);
-	else if (BIT_ACTIVE(flags, ('l' - 'a')))
-			l_flag(folder, pole, dir);
-	else if (BIT_ACTIVE(flags, ('R' - 'A')))
-			R_flag(folder, pole, dir, 0);
+	if (BIT_ACTIVE(flags, COMP('a')))
+		a_flag(folder, pole, dir);
+	else if (BIT_ACTIVE(flags, COMP('l')))
+		l_flag(folder, pole, dir);
+	else if (BIT_ACTIVE(flags, COMP('R')))
+		R_flag(folder, pole, dir, 0);
 	closedir(folder);
 	return (0);
 }

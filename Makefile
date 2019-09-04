@@ -6,7 +6,7 @@
 #    By: jhouston <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/02 13:22:47 by jhouston          #+#    #+#              #
-#    Updated: 2019/09/03 17:15:19 by jhouston         ###   ########.fr        #
+#    Updated: 2019/09/04 15:10:45 by jhouston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,8 @@ $(NAME):
 	$(ACC) $(FILES) $(FLAGS)
 	ar rv $(NAME) $(OBJ) $(LIB)
 	ranlib $(NAME)
-	rm -f $(OBJ)
-
-compile:
 	$(CC) $(FILES) $(LIBFT) $(FLAGS)
+	rm -f $(OBJ)
 
 
 clean:

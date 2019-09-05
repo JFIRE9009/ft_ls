@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 16:01:48 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/04 17:06:31 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:04:03 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,25 @@
 # define SET_BIT(FLAGS, BIT) (FLAGS |= (1 << BIT))
 # define COMP(CHAR) ((CHAR < 97) ? (CHAR - 'A') : (CHAR - 'a'))
 
-typedef struct		c_list {
+typedef struct		s_arg{
 	char			*data;
-	struct c_list	*next;
-}					l_path;
+	struct s_arg	*next;
+}					t_path;
 
-int					cDtO(int decimalNumber);
+int					scan_options(int max, char **flags);
+int					conv_dec_to_oct(int decimalnumber);
 int					*octarr(int oct);
 void				putperms(int mode);
 void				putmodes(char *path);
 void				indent_print(int indent);
-l_path				*l_flag(DIR *dir, l_path *store, struct dirent *had);
-void				R_flag(DIR *dir, struct dirent *had, int indent);
-void				a_flag(DIR *dir, struct c_list loop, struct dirent *had);
-void				no_flags(DIR *dir, struct c_list loop, struct dirent *had);
-int					scan_options(int max, char **flags);
+void				st_lst(t_path *lst, int (*cmp)(const char *, const char *));
+void				print_files(DIR *dir, t_path *store, struct dirent *entry, int flags);
+void				rec_flag(DIR *dir, struct dirent *had, int indent);
+void				no_flags(DIR *dir, t_path *store, struct dirent *entry);
+void				a_flag_print(t_path *result);
+void				l_flag_print(t_path *result);
+void				no_flag_print(t_path *result);
+void				add_empty_list(t_path *lst);
+t_path				*arg_store(DIR *dir, t_path *store, struct dirent *entry);
 
 #endif

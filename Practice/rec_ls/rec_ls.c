@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:24 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/04 15:37:10 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/06 09:36:38 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	 R_flag(DIR *dir,  struct dirent *entry, int indent)
 	{
 		if (entry->d_type == DT_DIR)
 		{
-			if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
-				continue;
+			if (ft_strcmp(entry->d_name, ".") != 0 || ft_strcmp(entry->d_name, "..") != 0)
+				continue ;
 			ft_putendl(entry->d_name);
 			indent_print(indent);
-            R_flag(dir, entry, indent + 2);
+			R_flag(dir, entry, indent + 2);
 		}
 	   	else
 		{

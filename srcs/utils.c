@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:47 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/05 14:58:29 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/06 17:10:05 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,28 @@ void	add_empty_list(t_path *lst)
 	}
 }
 
+void	r_st_lst(t_path *lst, int (*cmp)(const char *, const char *))
+{
+	char	*store;
+	t_path	*tmp;
+
+	tmp = lst;
+	while (lst->next)
+	{
+		if (((*cmp)(lst->data, lst->next->data)) < 0)
+		{
+			store = lst->data;
+			lst->data = lst->next->data;
+			lst->next->data = store;
+			lst = tmp;
+		}
+		else
+			lst = lst->next;
+	}
+	lst->next = NULL;
+	lst = tmp;
+}
+
 void	st_lst(t_path *lst, int (*cmp)(const char *, const char *))
 {
 	char	*store;
@@ -119,4 +141,49 @@ t_path	*arg_store(DIR *dir, t_path *store, struct dirent *entry)
 	store->next = NULL;
 	store = temp;
 	return (store);
+}
+
+int	main(void)
+{
+	t_path			*test;
+	DIR				*dir = opendir(".");
+	struct dirent	*entry;
+/*	t_path	*test1;
+	t_path	*test2;
+	t_path	*test3;
+	t_path	*test4;
+	t_path	*test5;
+	t_path	*test6;
+*/
+	test = (t_path *)malloc(sizeof(t_path));
+/*	test1 = (t_path *)malloc(sizeof(t_path));
+	test2 = (t_path *)malloc(sizeof(t_path));
+	test3 = (t_path *)malloc(sizeof(t_path));
+	test4 = (t_path *)malloc(sizeof(t_path));
+	test5 = (t_path *)malloc(sizeof(t_path));
+	test6 = (t_path *)malloc(sizeof(t_path));
+
+	test->data = "Bee";
+	test->next = test1;
+	test1->data = "Dee";
+	test1->next = test2;
+	test2->data = "Cee";
+	test2->next = test3;
+	test3->data = "Aye";
+	test3->next = test4;
+	test4->data = "Eee";
+	test4->next = test5;
+	test5->data = "Flamingoes!";
+	test5->next = NULL;
+*/
+	entry = NULL;
+	test = arg_store(dir, test, entry);
+//	add_empty_list(test);
+	add_empty_list(test);
+	r_st_lst(test, ft_strcmp);
+	while (test->next != NULL)
+	{
+		ft_putendl(test->data);
+		test = test->next;
+	}
 }

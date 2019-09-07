@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:16 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/05 15:54:18 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:41:27 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,20 @@ int	scan_options(int max, char **flags)
 	}
 	return (check);
 }
+/*
+int	main(int argc, char **argv)
+{
+	int flags;
+
+	ft_putnbr(flags = scan_options(argc, argv));
+	ft_putchar('\n');
+	if (argc > 1)
+	{
+		if (BIT_ACTIVE(-1, COMP('l')))
+			ft_putendl("r is pressed");
+		else
+			ft_putendl("isbroken");
+	}
+	else
+		ft_putendl("Invalid Input");
+}*/

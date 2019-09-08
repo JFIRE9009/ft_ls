@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:03 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/06 17:03:02 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/08 05:00:31 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,27 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 }
 
 
-void	l_flag_print(t_path *result)
+void	l_flag_print(t_path *result, int flags)
 {
 	while (result->next != NULL)
 	{
-		if (result->data[0] == '.')
+		if (result->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
 		{
 			result = result->next;
 			continue ;
 		}
-		putmodes(result->data);
+		if (BIT_ACTIVE(flags, COMP('l')))
+			putmodes(result->data);
 		ft_putendl(result->data);
 		result = result->next;
 	}
 }
-
-void	no_flag_print(t_path *result)
+/*
+void	a_flag_print(t_path *result, int flags)
 {
 	while (result->next != NULL)
 	{
-		if (result->data[0] == '.')
+		if (result->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
 		{
 			result = result->next;
 			continue ;
@@ -62,8 +63,8 @@ void	no_flag_print(t_path *result)
 		ft_putendl(result->data);
 		result = result->next;
 	}
-}
-
+}*/
+/*
 void	a_flag_print(t_path *result)
 {
 	while (result->next != NULL)
@@ -71,4 +72,4 @@ void	a_flag_print(t_path *result)
 		ft_putendl(result->data);
 		result = result->next;
 	}
-}
+}*/

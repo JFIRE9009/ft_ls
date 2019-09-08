@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:49:50 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/06 16:54:00 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/08 04:52:31 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int		main(int argc, char **argv)
 	pole = NULL;
 	dir = NULL;
 	folder = opendir(".");
-	if (argv[1] == NULL)
-		flags = 100;
-	else
-		flags = scan_options(argc, argv);
+//	if (argv[1] == NULL)
+//		flags = 100;
+//	else
+	flags = scan_options(argc, argv);
 	print_files(folder, pole, dir, flags);
 	closedir(folder);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:16 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/06 16:41:27 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/07 19:25:55 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	scan_options(int max, char **flags)
 		if (flags[i][0] == '-')
 		{
 			if (flags[i][j + 1] != '\0')
-			while (flags[i][j])
-			{
-				SET_BIT(check, (flags[i][j] - 'a'));
-				j++;
-			}
+				while (flags[i][j])
+				{
+					SET_BIT(check, (flags[i][j] - 'a'));
+					j++;
+				}
 			else
 			{
 				ft_putendl("Invalid Flag Input '-'");

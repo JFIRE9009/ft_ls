@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:03 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/08 05:00:31 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/10 15:46:23 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 }
 
 
-void	l_flag_print(t_path *result, int flags)
+void	l_flag_print(t_link *result, int flags)
 {
 	while (result->next != NULL)
 	{

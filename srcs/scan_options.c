@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:16 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/07 19:25:55 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:36:21 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	scan_options(int max, char **flags)
 			else
 			{
 				ft_putendl("Invalid Flag Input '-'");
-				return (0);
+				return (-1);
 			}
 		}
 		else
@@ -42,7 +42,7 @@ int	scan_options(int max, char **flags)
 			ft_putstr("ft_ls: "); 
 			ft_putstr(flags[i]);
 			ft_putendl(": No such file or directory");
-			return (0);
+			return (-1);
 		}
 		i++;
 	}

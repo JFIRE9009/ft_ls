@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:24 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/06 09:36:38 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:23:03 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,34 @@ void	indent_print(int indent)
 	}
 }
 
-void	 R_flag(DIR *dir,  struct dirent *entry, int indent)
+void	 R_flag(DIR *dir, char *name,  struct dirent *entry, int indent)
 {
+	t_link	*store;
+
+	store  = (t_link *)malloc(sizeof(t_link));
+	if(!(dir = opendir(name)))
+		return ;
+	store->data = name;
+	store->data = ft_strjoin(name, "/");
 	while ((entry = readdir(dir)) != NULL)
 	{
+		if (entry->d_name[0] == '.')
+			continue ;
 		if (entry->d_type == DT_DIR)
 		{
-			if (ft_strcmp(entry->d_name, ".") != 0 || ft_strcmp(entry->d_name, "..") != 0)
+			store->buff = ft_strnew(1024);
+			if (ft_strcmp(entry->d_name, ".") == 0 && ft_strcmp(entry->d_name, "..") == 0)
 				continue ;
-			ft_putendl(entry->d_name);
-			indent_print(indent);
-			R_flag(dir, entry, indent + 2);
+			store->buff = ft_strjoin(store->data, entry->d_name);
+			ft_putstr("\n./");
+			ft_putstr(entry->d_name);
+			ft_putstr(":\n");
+//			indent_print(indent);
+			R_flag(dir, store->buff, entry, indent + 2);
 		}
 	   	else
 		{
-			indent_print(indent);
+//			indent_print(indent);
 			ft_putchar('-');
 			ft_putendl(entry->d_name);
 		}
@@ -49,12 +62,66 @@ void	 R_flag(DIR *dir,  struct dirent *entry, int indent)
 	closedir(dir);
 }
 
+t_link	*R_flag_store(DIR *dir, char *name, struct dirent *entry)
+{
+	t_link	*temp;
+	t_link	*store;
+
+	store  = (t_link *)malloc(sizeof(t_link));
+	if(!(dir = opendir(name)))
+		return (NULL);
+	temp = store;
+	store->data = name;
+	store->data = ft_strjoin(name, "/");
+	while ((entry = readdir(dir)) != NULL)
+	{
+		if (entry->d_name[0] == '.')
+			continue ;
+		if (entry->d_type == DT_DIR)
+		{
+			store->buff = ft_strnew(1024);
+			if (ft_strcmp(entry->d_name, ".") == 0 && ft_strcmp(entry->d_name, "..") == 0)
+				continue ;
+			store->buff = ft_strjoin(store->data, entry->d_name);	
+			store->buff = ft_strjoin(store->buff, "\n./");
+			store->data = entry->d_name;
+			store->buff = ft_strjoin(store->buff, ":\n");
+			store->next = (t_link *)malloc(sizeof(t_link));
+			store = store->next;
+			R_flag_store(dir, store->data, entry);
+		}
+	   	else
+		{
+//			ft_putendl(entry->d_name);
+			store->data = entry->d_name;
+			store->next = (t_link *)malloc(sizeof(t_link));
+			store = store->next;
+		}
+	}
+	closedir(dir);
+	store->next = NULL;
+	store = temp;
+	return (store);
+
+}
+
 int		main(void)
 {
+	struct s_link	*store;
+	char			*name;
 	struct dirent	*folder;
 	DIR				*dir;
 
+	name = ".";
 	folder = NULL;
-	dir = opendir(".");
-	R_flag(dir, folder, 0);
+	dir = NULL;
+//	R_flag(dir, name, folder, 0);
+	store = R_flag_store(dir, name, folder);
+
+	while (store->next != NULL)
+	{
+		ft_putendl(store->buff);
+		ft_putendl(store->data);
+		store = store->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:49:50 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/08 04:52:31 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:35:27 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 int		main(int argc, char **argv)
 {
-	struct dirent	*dir;
-	struct s_arg	*pole;
-	DIR				*folder;
+	struct dirent	*sd;
+	struct s_link	*store;
+	DIR				*dir;
 	int				flags;
 
-	pole = NULL;
-	dir = NULL;
-	folder = opendir(".");
-//	if (argv[1] == NULL)
-//		flags = 100;
-//	else
+	store = NULL;
+	sd = NULL;
+	dir = opendir(".");
 	flags = scan_options(argc, argv);
-	print_files(folder, pole, dir, flags);
-	closedir(folder);
+	print_files(dir, store, sd, flags);
+	closedir(dir);
 	return (0);
 }

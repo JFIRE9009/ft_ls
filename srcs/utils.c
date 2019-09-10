@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:47 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/08 04:34:36 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:20:10 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	indent_print(int indent)
 	}
 }
 
-void	add_empty_list(t_path *lst)
+void	add_empty_list(t_link *lst)
 {
-	t_path	*new;
-	t_path	*tmp;
+	t_link	*new;
+	t_link	*tmp;
 
-	new = (t_path *)malloc(sizeof(t_path));
+	new = (t_link *)malloc(sizeof(t_link));
 	new->data = NULL;
 	new->next = NULL;
 	tmp = lst;
@@ -82,10 +82,10 @@ void	add_empty_list(t_path *lst)
 	}
 }
 
-void	r_st_lst(t_path *lst, int (*cmp)(const char *, const char *))
+void	r_st_lst(t_link *lst, int (*cmp)(const char *, const char *))
 {
 	char	*store;
-	t_path	*tmp;
+	t_link	*tmp;
 
 	tmp = lst;
 	while (lst->next)
@@ -104,10 +104,10 @@ void	r_st_lst(t_path *lst, int (*cmp)(const char *, const char *))
 	lst = tmp;
 }
 
-void	st_lst(t_path *lst, int (*cmp)(const char *, const char *))
+void	st_lst(t_link *lst, int (*cmp)(const char *, const char *))
 {
 	char	*store;
-	t_path	*tmp;
+	t_link	*tmp;
 
 	tmp = lst;
 	while (lst->next)
@@ -126,16 +126,16 @@ void	st_lst(t_path *lst, int (*cmp)(const char *, const char *))
 	lst = tmp;
 }
 
-t_path	*arg_store(DIR *dir, t_path *store, struct dirent *entry)
+t_link	*arg_store(DIR *dir, t_link *store, struct dirent *entry)
 {
-	t_path	*temp;
+	t_link	*temp;
 
-	store = (t_path *)malloc(sizeof(t_path));
+	store = (t_link *)malloc(sizeof(t_link));
 	temp = store;
 	while ((entry = readdir(dir)) != NULL)
 	{
 		store->data = entry->d_name;
-		store->next = (t_path *)malloc(sizeof(t_path));
+		store->next = (t_link *)malloc(sizeof(t_link));
 		store = store->next;
 	}
 	store->next = NULL;

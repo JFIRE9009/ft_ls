@@ -6,43 +6,11 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:47 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/10 16:20:10 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/14 10:08:41 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../lib_ls.h"
-
-int conv_dec_to_oct(int decimalnumber)
-{
-    int octalnumber;
-	int	i;
-
-	i = 1;
-	octalnumber = 0;
-    while (decimalnumber != 0)
-    {
-        octalnumber += (decimalnumber % 8) * i;
-        decimalnumber /= 8;
-        i *= 10;
-    }
-    return (octalnumber);
-}
-
-int	*octarr(int oct)
-{
-	int *retarr;
-	int i;
-
-	i = ft_intlen(conv_dec_to_oct(oct));
-	retarr = (int *)malloc(sizeof(int) * i);
-	while (oct >= 1)
-	{
-		retarr[i] = (oct % 10);
-		i--;
-		oct /= 10;
-	}
-	return (retarr);
-}
 
 void	indent_print(int indent)
 {
@@ -82,7 +50,8 @@ void	add_empty_list(t_link *lst)
 	}
 }
 
-void	r_st_lst(t_link *lst, int (*cmp)(const char *, const char *))
+
+void	st_lst(t_link *lst)
 {
 	char	*store;
 	t_link	*tmp;
@@ -90,7 +59,7 @@ void	r_st_lst(t_link *lst, int (*cmp)(const char *, const char *))
 	tmp = lst;
 	while (lst->next)
 	{
-		if (((*cmp)(lst->next->data, lst->data)) > 0)
+		if ((ft_strcmp(lst->data, lst->next->data)) > 0)
 		{
 			store = lst->data;
 			lst->data = lst->next->data;
@@ -104,7 +73,17 @@ void	r_st_lst(t_link *lst, int (*cmp)(const char *, const char *))
 	lst = tmp;
 }
 
-void	st_lst(t_link *lst, int (*cmp)(const char *, const char *))
+int		sort_time(char *file, char *file2)
+{
+	struct stat		buff;
+	struct stat		buff2;
+
+	stat(file, &buff);
+	stat(file2, &buff2);
+	return (buff.st_mtime < buff2.st_mtime);
+}
+
+void			t_st_lst(t_link *lst)
 {
 	char	*store;
 	t_link	*tmp;
@@ -112,7 +91,7 @@ void	st_lst(t_link *lst, int (*cmp)(const char *, const char *))
 	tmp = lst;
 	while (lst->next)
 	{
-		if (((*cmp)(lst->data, lst->next->data)) > 0)
+		if ((sort_time(lst->data, lst->next->data)))
 		{
 			store = lst->data;
 			lst->data = lst->next->data;
@@ -141,4 +120,24 @@ t_link	*arg_store(DIR *dir, t_link *store, struct dirent *entry)
 	store->next = NULL;
 	store = temp;
 	return (store);
+}
+
+void	r_st_lst(t_link **head)
+{
+	t_link	*former;
+	t_link *current;
+	t_link	*latter;
+
+	latter = NULL;
+	former = NULL;
+	current = *head;
+	while (current != NULL)
+	{
+		latter = current->next;
+		current->next = former;
+		former = current;
+		current = latter;
+	}
+	*head = former;
+	(*head) = (*head)->next;
 }

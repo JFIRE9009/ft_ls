@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:03 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/10 15:46:23 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/14 10:16:44 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 	closedir(dir);
 }
 
-
 void	l_flag_print(t_link *result, int flags)
 {
 	while (result->next != NULL)
@@ -50,26 +49,3 @@ void	l_flag_print(t_link *result, int flags)
 		result = result->next;
 	}
 }
-/*
-void	a_flag_print(t_path *result, int flags)
-{
-	while (result->next != NULL)
-	{
-		if (result->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
-		{
-			result = result->next;
-			continue ;
-		}
-		ft_putendl(result->data);
-		result = result->next;
-	}
-}*/
-/*
-void	a_flag_print(t_path *result)
-{
-	while (result->next != NULL)
-	{
-		ft_putendl(result->data);
-		result = result->next;
-	}
-}*/

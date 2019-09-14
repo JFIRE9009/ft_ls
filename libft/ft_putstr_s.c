@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_files.c                                      :+:      :+:    :+:   */
+/*   ft_putstr_s.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 15:02:15 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/14 10:04:50 by jhouston         ###   ########.fr       */
+/*   Created: 2019/05/27 08:55:08 by jhouston          #+#    #+#             */
+/*   Updated: 2019/09/13 14:11:49 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib_ls.h"
+#include "libft.h"
 
-void	print_files(DIR	*dir, t_link *store, struct dirent *entry, int flags)
+void	ft_putstr_s(const char *str)
 {
-	store = arg_store(dir, store, entry);
-	st_lst(store);
-	if (BIT_ACTIVE(flags, COMP('t')))
-		t_st_lst(store);
-	if (BIT_ACTIVE(flags, COMP('r')))
-		r_st_lst(&store);
-	l_flag_print(store, flags);
+	size_t i;
+
+	i = 0;
+	if (str == NULL)
+		return ((void)NULL);
+	while (str[i] != '\0')
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+	ft_putchar(' ');
 }

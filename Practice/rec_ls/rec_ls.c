@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:24 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/10 17:23:03 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/12 06:35:09 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	 R_flag(DIR *dir, char *name,  struct dirent *entry, int indent)
 {
 	t_link	*store;
 
-	store  = (t_link *)malloc(sizeof(t_link));
+	store = (t_link *)malloc(sizeof(t_link));
 	if(!(dir = opendir(name)))
 		return ;
 	store->data = name;
@@ -49,7 +49,6 @@ void	 R_flag(DIR *dir, char *name,  struct dirent *entry, int indent)
 			ft_putstr("\n./");
 			ft_putstr(entry->d_name);
 			ft_putstr(":\n");
-//			indent_print(indent);
 			R_flag(dir, store->buff, entry, indent + 2);
 		}
 	   	else
@@ -107,7 +106,7 @@ t_link	*R_flag_store(DIR *dir, char *name, struct dirent *entry)
 
 int		main(void)
 {
-	struct s_link	*store;
+//	struct s_link	*store;
 	char			*name;
 	struct dirent	*folder;
 	DIR				*dir;
@@ -115,13 +114,13 @@ int		main(void)
 	name = ".";
 	folder = NULL;
 	dir = NULL;
-//	R_flag(dir, name, folder, 0);
-	store = R_flag_store(dir, name, folder);
+	R_flag(dir, name, folder, 0);
+//	store = R_flag_store(dir, name, folder);
 
-	while (store->next != NULL)
-	{
-		ft_putendl(store->buff);
-		ft_putendl(store->data);
-		store = store->next;
-	}
+//	while (store->next != NULL)
+//	{
+//		ft_putendl(store->buff);
+//		ft_putendl(store->data);
+//		store = store->next;
+//	}
 }

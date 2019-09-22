@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:03 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/14 10:16:44 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/22 11:09:58 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 	closedir(dir);
 }
 
-void	l_flag_print(t_link *result, int flags)
+void	l_flag_print(char *path, t_link *result, int flags)
 {
+	t_link	*lst;
+	struct stat buff;
+	path = NULL;
+	lst = result;
+
 	while (result->next != NULL)
 	{
 		if (result->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
@@ -47,5 +52,17 @@ void	l_flag_print(t_link *result, int flags)
 			putmodes(result->data);
 		ft_putendl(result->data);
 		result = result->next;
+	}
+	while (lst->next != NULL && BIT_ACTIVE(flags, COMP('R')))
+	{
+		stat(lst->data, &buff);
+		if (S_ISDIR(buff.st_mode) && ft_strcmp(lst->data, ".") != 0 && ft_strcmp(lst->data, "..") != 0)
+		{
+			ft_putchar('\n');
+			ft_putstr(lst->data);
+			ft_putendl(":");
+			l_flag_print(lst->data, result, flags);
+		}
+		lst = lst->next;
 	}
 }

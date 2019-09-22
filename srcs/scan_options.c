@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:50:16 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/10 13:36:21 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:57:17 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	scan_options(int max, char **flags)
 			if (flags[i][j + 1] != '\0')
 				while (flags[i][j])
 				{
-					SET_BIT(check, (flags[i][j] - 'a'));
+					SET_BIT(check, COMP(flags[i][j]));
 					j++;
 				}
 			else

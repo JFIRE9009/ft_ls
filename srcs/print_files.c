@@ -6,7 +6,7 @@
 /*   By: jhouston <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:02:15 by jhouston          #+#    #+#             */
-/*   Updated: 2019/09/14 10:04:50 by jhouston         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:44:44 by jhouston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	print_files(DIR	*dir, t_link *store, struct dirent *entry, int flags)
 		t_st_lst(store);
 	if (BIT_ACTIVE(flags, COMP('r')))
 		r_st_lst(&store);
-	l_flag_print(store, flags);
+	l_flag_print(NULL, store, flags);
 }

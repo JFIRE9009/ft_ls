@@ -104,7 +104,7 @@ void	R_flag_store(char *name, struct dirent *entry)
 		s_dir = s_dir->next;
 	}
 }
-/*
+
 int	main(void)
 {
 	//struct s_link	*store;
@@ -114,4 +114,4 @@ int	main(void)
 	name = ".";
 	folder = NULL;
 	R_flag_store(name, folder);
-}*/
+}

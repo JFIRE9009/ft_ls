@@ -25,24 +25,22 @@ void	put_id(struct stat buff)
 
 void	put_time(struct stat buff)
 {
-	struct timespec			time;
-	char					*time2;
+	char			*time;
 
-	time = buff.st_mtimespec;
-	time2 = ctime(&time.tv_sec) + 4;
-	time2[12] = '\0';
-	ft_putstr_s(time2);
+	time = ctime(&buff.st_mtime) + 4;
+	time[12] = '\0';
+	ft_putstr_s(time);
 }
 
 void	putmodes(char *path)
 {
-	register mode_t			mode;
+	// register mode_t			mode;
 	struct stat				buff;
 	int						links;
 	int						size;
 
-	stat(path, &buff);
-	mode = buff.st_mode;
+	lstat(path, &buff);
+	// mode = buff.st_mode;
 	links = buff.st_nlink;
 	size = buff.st_size;
 	putperms(buff);
@@ -50,6 +48,30 @@ void	putmodes(char *path)
 	put_id(buff);
 	ft_putnbr_t(size);
 	put_time(buff);
+}
+
+void putblocks(t_link *lst, int flags)
+{
+	t_link			*tmp;
+	struct stat 	buff;
+	int 			blocks;
+
+	tmp = lst;
+	blocks = 0;
+	while(tmp->next != NULL)
+	{
+		if (tmp->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		lstat(tmp->data, &buff);
+		blocks = blocks + (buff.st_blocks / 2);
+		tmp = tmp->next;
+	}
+	ft_putstr("total ");
+	ft_putnbr(blocks);
+	ft_putendl(" ");
 }
 
 void	putperms(struct stat fileperms)

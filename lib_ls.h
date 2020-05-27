@@ -18,7 +18,6 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <grp.h>
-# include <uuid/uuid.h>
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <time.h>
@@ -35,6 +34,7 @@ typedef struct		s_link{
 int					scan_options(int max, char **flags);
 int					sort_time(char *file, char *file2);
 void				putperms(struct stat fileperms);
+void				putblocks(t_link *lst, int flags);
 void				putmodes(char *path);
 void				indent_print(int indent);
 void				st_lst(t_link *lst);
@@ -44,7 +44,8 @@ void				print_files(DIR *dir, t_link *store, struct dirent *entry, int flags);
 void				rec_flag(DIR *dir, struct dirent *had, int indent);
 void				no_flags(DIR *dir, t_link *store, struct dirent *entry);
 void				a_flag_print(t_link *result, int flags);
-void				l_flag_print(char *path, t_link *result, int flags);
+// void				l_flag_print(char *path, t_link *result, int flags);
+void				l_flag_print(t_link *result, int flags);
 void				no_flag_print(t_link *result);
 void				add_empty_list(t_link *lst);
 t_link				*arg_store(DIR *dir, t_link *store, struct dirent *entry);

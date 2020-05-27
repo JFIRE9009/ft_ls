@@ -23,6 +23,7 @@ int	scan_options(int max, char **flags)
 	while (i < max)
 	{
 		j = 0;
+		
 		if (flags[i][0] == '-')
 		{
 			if (flags[i][j + 1] != '\0')

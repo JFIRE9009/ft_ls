@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "./../lib_ls.h"
+#include <errno.h>
 
 int		main(int argc, char **argv)
 {
@@ -24,6 +25,5 @@ int		main(int argc, char **argv)
 	dir = opendir(".");
 	flags = scan_options(argc, argv);
 	print_files(dir, store, sd, flags);
-	closedir(dir);
 	return (0);
 }

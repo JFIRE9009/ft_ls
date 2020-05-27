@@ -34,13 +34,14 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 	closedir(dir);
 }
 
-void	l_flag_print(char *path, t_link *result, int flags)
+void	l_flag_print(t_link *result, int flags)
 {
 	t_link	*lst;
 	struct stat buff;
-	path = NULL;
 	lst = result;
 
+	if (BIT_ACTIVE(flags, COMP('l')))
+		putblocks(result, flags);
 	while (result->next != NULL)
 	{
 		if (result->data[0] == '.' && !BIT_ACTIVE(flags, COMP('a')))
@@ -61,7 +62,8 @@ void	l_flag_print(char *path, t_link *result, int flags)
 			ft_putchar('\n');
 			ft_putstr(lst->data);
 			ft_putendl(":");
-			l_flag_print(lst->data, result, flags);
+			l_flag_print(lst->next, flags);
+			// l_flag_print(lst->data, result, flags);
 		}
 		lst = lst->next;
 	}

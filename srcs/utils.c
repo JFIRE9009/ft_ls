@@ -23,6 +23,37 @@ void	indent_print(int indent)
 		i++;
 	}
 }
+ 
+void	free_list(t_link *list)
+{
+	t_link		*head;
+
+	head = list;
+	while (head != NULL)
+	{
+		free(head->data);
+		head = head->next;
+		free(list);
+		list = head;
+	}
+}
+
+t_link	*arg_store(DIR *dir, t_link *store, struct dirent *entry)
+{
+	t_link	*temp;
+
+	store = (t_link *)malloc(sizeof(t_link));
+	temp = store;
+	while ((entry = readdir(dir)) != NULL)
+	{
+		store->data = entry->d_name;
+		store->next = (t_link *)malloc(sizeof(t_link));
+		store = store->next;
+	}
+	store->next = NULL;
+	store = temp;
+	return (store);
+}
 
 void	add_empty_list(t_link *lst)
 {
@@ -80,7 +111,9 @@ int		sort_time(char *file, char *file2)
 
 	stat(file, &buff);
 	stat(file2, &buff2);
-	return (buff.st_mtime < buff2.st_mtime);
+	if (buff.st_ctime == buff2.st_ctime)
+		return (buff.st_ctim.tv_nsec < buff2.st_ctim.tv_nsec);
+	return (buff.st_ctime < buff2.st_ctime);
 }
 
 void			t_st_lst(t_link *lst)
@@ -103,23 +136,6 @@ void			t_st_lst(t_link *lst)
 	}
 	lst->next = NULL;
 	lst = tmp;
-}
-
-t_link	*arg_store(DIR *dir, t_link *store, struct dirent *entry)
-{
-	t_link	*temp;
-
-	store = (t_link *)malloc(sizeof(t_link));
-	temp = store;
-	while ((entry = readdir(dir)) != NULL)
-	{
-		store->data = entry->d_name;
-		store->next = (t_link *)malloc(sizeof(t_link));
-		store = store->next;
-	}
-	store->next = NULL;
-	store = temp;
-	return (store);
 }
 
 void	r_st_lst(t_link **head)

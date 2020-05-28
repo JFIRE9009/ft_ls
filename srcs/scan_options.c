@@ -39,7 +39,6 @@ int	scan_options(int max, char **flags)
 		}
 		else
 			no_file_error(flags[i]);
-		
 		i++;
 	}
 	return (check);

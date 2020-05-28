@@ -34,11 +34,11 @@ int	scan_options(int max, char **flags)
 					SET_BIT(check, COMP(flags[i][j]));
 					j++;
 				}
-			else
-				no_file_error(flags[i]);
+			// else
+				// no_file_error(flags[i]);
 		}
-		else
-			no_file_error(flags[i]);
+		// else
+			// no_file_error(flags[i]);
 		i++;
 	}
 	return (check);

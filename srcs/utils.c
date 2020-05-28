@@ -141,7 +141,7 @@ void			t_st_lst(t_link *lst)
 void	r_st_lst(t_link **head)
 {
 	t_link	*former;
-	t_link *current;
+	t_link 	*current;
 	t_link	*latter;
 
 	latter = NULL;
@@ -156,4 +156,24 @@ void	r_st_lst(t_link **head)
 	}
 	*head = former;
 	(*head) = (*head)->next;
+}
+
+char    *path_join(char *str, char *str2)
+{
+    str = ft_strjoin(str, "/");
+    return(ft_strjoin(str, str2));
+}
+
+int 	check_file_exists(char *filename)
+{
+	DIR 			*dir;
+	struct dirent 	*entry;
+
+	dir = opendir(".");
+	while ((entry = readdir(dir)) != NULL)
+	{
+		if (ft_strcmp(filename, entry->d_name) == 0)
+			return (1);
+	}
+	return (0);
 }

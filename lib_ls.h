@@ -31,8 +31,11 @@ typedef struct		s_link{
 	struct s_link	*next;
 }					t_link;
 
+char				*path_join(char *str, char *str2);
 int					scan_options(int max, char **flags);
 int					sort_time(char *file, char *file2);
+int				 	check_file_exists(char *filename);
+void				error_check(int max, char **flags);
 void				putperms(struct stat fileperms);
 void				putblocks(t_link *lst, int flags);
 void				putmodes(char *path);
@@ -41,7 +44,7 @@ void				st_lst(t_link *lst);
 void				r_st_lst(t_link **lst);
 void				t_st_lst(t_link *lst);
 void				print_files(DIR *dir, t_link *store, struct dirent *entry, int flags);
-void				rec_flag(DIR *dir, struct dirent *had, int indent);
+void				rec_flag(char *folder, int indent, int flags);
 void				no_flags(DIR *dir, t_link *store, struct dirent *entry);
 void				a_flag_print(t_link *result, int flags);
 // void				l_flag_print(char *path, t_link *result, int flags);

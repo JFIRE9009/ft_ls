@@ -27,3 +27,31 @@ void unrecognized_option_error(char c)
     ft_putendl("' \nAvailable options: '-a' '-l' '-r' '-R' '-t'");
     exit (-1);
 }
+
+void    error_check(int max, char **flags)
+{
+	int i;
+	int j;
+
+	i = 1;
+	while (i < max)
+	{
+		j = 0;
+		if (flags[i][0] == '-')
+		{
+			if (flags[i][j + 1] != '\0')
+				while (flags[i][j])
+				{
+					if (flags[i][j] != '-' && flags[i][j] != 'a' && flags[i][j] != 'l' && flags[i][j] != 'r' && \
+					flags[i][j] != 't' && flags[i][j] != 'R')
+						unrecognized_option_error(flags[i][j]);
+					j++;
+				}
+			else
+				no_file_error(flags[i]);
+		}
+		else
+			no_file_error(flags[i]);
+		i++;
+	}
+}

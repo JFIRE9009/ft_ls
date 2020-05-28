@@ -12,18 +12,24 @@
 
 #include "./../lib_ls.h"
 
-void rec_flag(DIR *dir, struct dirent *entry, int indent)
+void rec_flag(char *folder, int indent, int flags)
 {
+	DIR *dir;
+	struct dirent *entry;
+	char *path;
+
+	if(!(dir = opendir(folder)))
+		return ;
 	while ((entry = readdir(dir)) != NULL) 
 	{
 		if (entry->d_type == DT_DIR) 
 		{
-			if (ft_strcmp(entry->d_name, ".") == 0 ||\
-				   	ft_strcmp(entry->d_name, "..") == 0)
-				continue;
-			ft_putendl(entry->d_name);
+            if (entry->d_name[0] == '.')
+                continue;
+			path = path_join(folder, entry->d_name);
+			ft_putendl(ft_strjoin("./", entry->d_name));
 			indent_print(indent);
-            rec_flag(dir, entry, indent + 2);
+            rec_flag(path, indent + 2, flags);
 		}
 	   	else 
 		{
@@ -36,10 +42,6 @@ void rec_flag(DIR *dir, struct dirent *entry, int indent)
 
 void	l_flag_print(t_link *result, int flags)
 {
-	t_link	*lst;
-	struct stat buff;
-	lst = result;
-
 	if (BIT_ACTIVE(flags, COMP('l')))
 		putblocks(result, flags);
 	while (result->next != NULL)
@@ -53,18 +55,5 @@ void	l_flag_print(t_link *result, int flags)
 			putmodes(result->data);
 		ft_putendl(result->data);
 		result = result->next;
-	}
-	while (lst->next != NULL && BIT_ACTIVE(flags, COMP('R')))
-	{
-		stat(lst->data, &buff);
-		if (S_ISDIR(buff.st_mode) && ft_strcmp(lst->data, ".") != 0 && ft_strcmp(lst->data, "..") != 0)
-		{
-			ft_putchar('\n');
-			ft_putstr(lst->data);
-			ft_putendl(":");
-			l_flag_print(lst->next, flags);
-			// l_flag_print(lst->data, result, flags);
-		}
-		lst = lst->next;
 	}
 }

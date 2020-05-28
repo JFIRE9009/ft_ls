@@ -28,30 +28,39 @@ void unrecognized_option_error(char c)
     exit (-1);
 }
 
-void    error_check(int max, char **flags)
+DIR    *error_check(int max, char **args)
 {
-	int i;
-	int j;
+    DIR *dir;
+    int i;
+    
+    i = 1;
+    while (args[i] != NULL)
+    {
+        if (!(dir = opendir(args[i])))
+        {
+            if (check_file_exists(args[i]) == 0)
+            {
+                if (args[i][0] != '-')
+                    no_file_error(args[i]);
+                dir = opendir(".");
+            }
+            else
+                print_option(max, args, i);
+        }
+        else
+            dir = opendir(args[i]);
+        i++;
+    }
+    return (dir);
+}
 
-	i = 1;
-	while (i < max)
-	{
-		j = 0;
-		if (flags[i][0] == '-')
-		{
-			if (flags[i][j + 1] != '\0')
-				while (flags[i][j])
-				{
-					if (flags[i][j] != '-' && flags[i][j] != 'a' && flags[i][j] != 'l' && flags[i][j] != 'r' && \
-					flags[i][j] != 't' && flags[i][j] != 'R')
-						unrecognized_option_error(flags[i][j]);
-					j++;
-				}
-			else
-				no_file_error(flags[i]);
-		}
-		else
-			no_file_error(flags[i]);
-		i++;
-	}
+void        print_option(int max, char **args, int index)
+{
+    int flags;
+
+    flags = scan_options(max, args);
+    if (BIT_ACTIVE(flags, COMP('l')))
+        putmodes(args[index]);
+    ft_putendl(args[index]);
+    exit(1);
 }

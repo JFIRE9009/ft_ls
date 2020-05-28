@@ -34,29 +34,8 @@ int	scan_options(int max, char **flags)
 					SET_BIT(check, COMP(flags[i][j]));
 					j++;
 				}
-			// else
-				// no_file_error(flags[i]);
 		}
-		// else
-			// no_file_error(flags[i]);
 		i++;
 	}
 	return (check);
 }
-/*
-int	main(int argc, char **argv)
-{
-	int flags;
-
-	ft_putnbr(flags = scan_options(argc, argv));
-	ft_putchar('\n');
-	if (argc > 1)
-	{
-		if (BIT_ACTIVE(-1, COMP('l')))
-			ft_putendl("r is pressed");
-		else
-			ft_putendl("isbroken");
-	}
-	else
-		ft_putendl("Invalid Input");
-}*/

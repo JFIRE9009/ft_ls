@@ -34,13 +34,11 @@ void	put_time(struct stat buff)
 
 void	putmodes(char *path)
 {
-	// register mode_t			mode;
 	struct stat				buff;
 	int						links;
 	int						size;
 
 	lstat(path, &buff);
-	// mode = buff.st_mode;
 	links = buff.st_nlink;
 	size = buff.st_size;
 	putperms(buff);

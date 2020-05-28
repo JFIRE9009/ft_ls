@@ -18,39 +18,13 @@ int		main(int argc, char **argv)
 	struct s_link	*store;
 	DIR				*dir;
 	int				flags;
-	int 			i;
 
 	store = NULL;
 	sd = NULL;
 	dir = NULL;
-	i = 1;
 
 	if (argc > 1)
-	{
-		while (argv[i] != NULL)
-		{
-			if (!(dir = opendir(argv[i])))
-			{
-				if (check_file_exists(argv[i]) == 0)
-				{
-					if (argv[i][0] != '-')
-						no_file_error(argv[i]);
-					dir = opendir(".");
-				}
-				else
-				{
-					flags = scan_options(argc, argv);
-					if (BIT_ACTIVE(flags, COMP('l')))
-						putmodes(argv[i]);
-					ft_putendl(argv[i]);
-					exit(1);
-				}
-			}
-			else
-				dir = opendir(argv[i]);
-			i++;
-		}
-	}
+		dir = error_check(argc, argv);
 	else
 		dir = opendir(".");
 	flags = scan_options(argc, argv);

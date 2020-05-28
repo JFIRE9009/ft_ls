@@ -50,5 +50,7 @@ void				no_flag_print(t_link *result);
 void				add_empty_list(t_link *lst);
 t_link				*arg_store(DIR *dir, t_link *store, struct dirent *entry);
 void				add_at_end(char *path, t_link *store);
+void				no_file_error(char *s);
+void				unrecognized_option_error(char c);
 
 #endif

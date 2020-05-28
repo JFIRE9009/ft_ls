@@ -23,28 +23,23 @@ int	scan_options(int max, char **flags)
 	while (i < max)
 	{
 		j = 0;
-		
 		if (flags[i][0] == '-')
 		{
 			if (flags[i][j + 1] != '\0')
 				while (flags[i][j])
 				{
+					if (flags[i][j] != '-' && flags[i][j] != 'a' && flags[i][j] != 'l' && flags[i][j] != 'r' && \
+					flags[i][j] != 't' && flags[i][j] != 'R')
+						unrecognized_option_error(flags[i][j]);
 					SET_BIT(check, COMP(flags[i][j]));
 					j++;
 				}
 			else
-			{
-				ft_putendl("Invalid Flag Input '-'");
-				return (-1);
-			}
+				no_file_error(flags[i]);
 		}
 		else
-		{
-			ft_putstr("ft_ls: "); 
-			ft_putstr(flags[i]);
-			ft_putendl(": No such file or directory");
-			return (-1);
-		}
+			no_file_error(flags[i]);
+		
 		i++;
 	}
 	return (check);

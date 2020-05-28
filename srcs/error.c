@@ -12,17 +12,18 @@
 
 #include "./../lib_ls.h"
 
-int		main(int argc, char **argv)
+void no_file_error(char *s)
 {
-	struct dirent	*sd;
-	struct s_link	*store;
-	DIR				*dir;
-	int				flags;
+    ft_putstr("ft_ls: cannot access '"); 
+    ft_putstr(s);
+    ft_putendl("' : No such file or directory");
+    exit (-1);
+}
 
-	store = NULL;
-	sd = NULL;
-	dir = opendir(".");
-	flags = scan_options(argc, argv);
-	print_files(dir, store, sd, flags);
-	return (0);
+void unrecognized_option_error(char c)
+{
+    ft_putstr("ft_ls: unrecognized option '");
+    ft_putchar(c);
+    ft_putendl("' \nAvailable options: '-a' '-l' '-r' '-R' '-t'");
+    exit (-1);
 }

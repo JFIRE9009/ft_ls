@@ -22,13 +22,19 @@ LIB= lib_ls.h
 all: $(NAME)
 
 $(NAME):
+	make -C "./libft"
 	$(ACC) $(FILES) $(FLAGS)
 	ar rv $(NAME) $(OBJ) $(LIB)
 	ranlib $(NAME)
 	$(CC) $(FILES) $(LIBFT) $(FLAGS)
-	rm -f $(OBJ)
 
 
 clean:
+	make -C "./libft" clean
+	rm -f $(OBJ)
+
+fclean: clean
+	make -C "./libft" fclean
 	rm -f $(NAME)
+
 re: clean all

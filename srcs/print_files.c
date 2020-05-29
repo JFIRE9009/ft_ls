@@ -21,4 +21,5 @@ void	print_files(DIR	*dir, t_link *store, struct dirent *entry, int flags)
 	if (BIT_ACTIVE(flags, COMP('r')))
 		r_st_lst(&store);
 	l_flag_print(store, flags);
+	free_list(store);
 }

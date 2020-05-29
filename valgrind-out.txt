@@ -1,0 +1,664 @@
+==13816== Memcheck, a memory error detector
+==13816== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==13816== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==13816== Command: ./ft_ls -r
+==13816== Parent PID: 5488
+==13816== 
+--13816-- 
+--13816-- Valgrind options:
+--13816--    --tool=memcheck
+--13816--    --leak-check=full
+--13816--    --show-leak-kinds=all
+--13816--    --track-fds=yes
+--13816--    --track-origins=yes
+--13816--    --show-reachable=yes
+--13816--    --verbose
+--13816--    --gen-suppressions=all
+--13816--    --log-file=valgrind-out.txt
+--13816-- Contents of /proc/version:
+--13816--   Linux version 5.4.0-31-generic (buildd@lgw01-amd64-059) (gcc version 9.3.0 (Ubuntu 9.3.0-10ubuntu2)) #35-Ubuntu SMP Thu May 7 20:20:34 UTC 2020
+--13816-- 
+--13816-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--13816-- Page sizes: currently 4096, max supported 4096
+--13816-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--13816-- Reading syms from /home/jfire/Documents/ft_ls/ft_ls
+--13816-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--13816--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--13816--   .. CRC mismatch (computed 387b17ea wanted d28cf5ef)
+--13816--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--13816--   .. CRC mismatch (computed 387b17ea wanted d28cf5ef)
+--13816--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--13816--   .. CRC is valid
+--13816-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--13816--    object doesn't have a symbol table
+--13816--    object doesn't have a dynamic symbol table
+--13816-- Scheduler: using generic scheduler lock implementation.
+--13816-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==13816== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-13816-by-jfire-on-???
+==13816== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-13816-by-jfire-on-???
+==13816== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-13816-by-jfire-on-???
+==13816== 
+==13816== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==13816== don't want to do, unless you know exactly what you're doing,
+==13816== or are doing some strange experiment):
+==13816==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=13816 ...command...
+==13816== 
+==13816== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==13816==   /path/to/gdb ./ft_ls
+==13816== and then give GDB the following command
+==13816==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=13816
+==13816== --pid is optional if only one valgrind process is running
+==13816== 
+--13816-- REDIR: 0x4022d80 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--13816-- REDIR: 0x4022b50 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--13816-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--13816--    object doesn't have a symbol table
+--13816-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--13816--    object doesn't have a symbol table
+==13816== WARNING: new redirection conflicts with existing -- ignoring it
+--13816--     old: 0x04022d80 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--13816--     new: 0x04022d80 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--13816-- REDIR: 0x401f560 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--13816-- REDIR: 0x40232e0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--13816-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--13816--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--13816--   .. CRC mismatch (computed a6f43087 wanted 6555436e)
+--13816--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--13816--   .. CRC mismatch (computed a6f43087 wanted 6555436e)
+--13816--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--13816--   .. CRC is valid
+--13816-- REDIR: 0x48fe600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48ffdd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491ae60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491a9a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd2d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe6c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491a960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd7f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd3b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fead0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491c0d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491a9e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd9a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fd7b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x4906d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe9d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x491aab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fdc60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe8d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fe870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48ffe10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x48fea20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--13816-- REDIR: 0x490fa30 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
+--13816-- REDIR: 0x48f8260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--13816-- REDIR: 0x48f8850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+==13816== Conditional jump or move depends on uninitialised value(s)
+==13816==    at 0x10A52B: ft_strcmp (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109F78: st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BED: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Uninitialised value was created by a heap allocation
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:ft_strcmp
+   fun:st_lst
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x109B9F: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x109B43: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x109B84: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x109B93: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x109B5B: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a601c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== Invalid read of size 8
+==13816==    at 0x10A20C: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C3A: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:free_list
+   fun:print_files
+   fun:main
+}
+==13816== Invalid free() / delete / delete[] / realloc()
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C3A: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Free
+   fun:free
+   fun:free_list
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== FILE DESCRIPTORS: 56 open at exit.
+==13816== Open file descriptor 104: /usr/share/code/natives_blob.bin
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 78: /dev/shm/.org.chromium.Chromium.bMDbcn (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 77: /dev/shm/.org.chromium.Chromium.zTyivq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 76: /dev/shm/.org.chromium.Chromium.kQ2lYp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 75: /dev/shm/.org.chromium.Chromium.ka6lkr (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 74: /dev/shm/.org.chromium.Chromium.Bk81Xm (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 73: /dev/shm/.org.chromium.Chromium.2vrSnp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 72: /dev/shm/.org.chromium.Chromium.r8t4Wp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 71: /dev/shm/.org.chromium.Chromium.D8Gfrp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 70: /dev/shm/.org.chromium.Chromium.ksORfp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 69: /dev/shm/.org.chromium.Chromium.dHX1uq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 68: /dev/shm/.org.chromium.Chromium.6WJCjq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 67: /dev/shm/.org.chromium.Chromium.dwiXxp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 66: /dev/shm/.org.chromium.Chromium.lKqdMo (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 65: /dev/shm/.org.chromium.Chromium.n7Dvup (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 64: /dev/shm/.org.chromium.Chromium.zyYHun (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 63: /dev/shm/.org.chromium.Chromium.A0hpup (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 62: /dev/shm/.org.chromium.Chromium.veOL6m (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 61: /dev/shm/.org.chromium.Chromium.NWQrjq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 60: /dev/shm/.org.chromium.Chromium.2pwREo (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 59: /dev/shm/.org.chromium.Chromium.2qe4Yq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 58: /dev/shm/.org.chromium.Chromium.v6vo4n (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 57: /usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 56: /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 55: /usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 54: /dev/shm/.org.chromium.Chromium.8RZDwq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 53: /usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 51: /usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 50: /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 49: /dev/shm/.org.chromium.Chromium.xv7KVn (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 47: /usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 46: /usr/share/fonts/truetype/liberation2/LiberationSerif-Regular.ttf
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 42: /usr/share/code/resources/app/node_modules.asar
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 41: /dev/shm/.org.chromium.Chromium.OftZen (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 40: /dev/shm/.org.chromium.Chromium.LK4KVq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 39: /dev/shm/.org.chromium.Chromium.5XsGOn (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 38: /dev/shm/.org.chromium.Chromium.vXBygp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 37: /dev/shm/.org.chromium.Chromium.lc5Agp (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open AF_UNIX socket 36: <unknown>
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 31: /dev/shm/.org.chromium.Chromium.9N5IZq (deleted)
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open AF_UNIX socket 20: <unknown>
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 19: /usr/share/code/resources.pak
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 18: /usr/share/code/locales/en-GB.pak
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 17: /usr/share/code/chrome_200_percent.pak
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 16: /usr/share/code/chrome_100_percent.pak
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 15: /usr/share/code/natives_blob.bin
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 14: /usr/share/code/v8_context_snapshot.bin
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 13: /usr/share/code/icudtl.dat
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 12:
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open AF_UNIX socket 5: <unknown>
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open AF_UNIX socket 4: <unknown>
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 3: /home/jfire/Documents/ft_ls/valgrind-out.txt
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 2: /dev/pts/1
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 1: /dev/pts/1
+==13816==    <inherited from parent>
+==13816== 
+==13816== Open file descriptor 0: /dev/pts/1
+==13816==    <inherited from parent>
+==13816== 
+==13816== 
+==13816== HEAP SUMMARY:
+==13816==     in use at exit: 0 bytes in 0 blocks
+==13816==   total heap usage: 22 allocs, 41 frees, 65,952 bytes allocated
+==13816== 
+==13816== All heap blocks were freed -- no leaks are possible
+==13816== 
+==13816== ERROR SUMMARY: 110 errors from 8 contexts (suppressed: 0 from 0)
+==13816== 
+==13816== 1 errors in context 1 of 8:
+==13816== Conditional jump or move depends on uninitialised value(s)
+==13816==    at 0x10A52B: ft_strcmp (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109F78: st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BED: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Uninitialised value was created by a heap allocation
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:ft_strcmp
+   fun:st_lst
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 2 errors in context 2 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x109B5B: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a601c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 16 errors in context 3 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x109B93: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 16 errors in context 4 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x109B84: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 18 errors in context 5 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x109B43: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 19 errors in context 6 of 8:
+==13816== Invalid free() / delete / delete[] / realloc()
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C3A: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c0 is 0 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Free
+   fun:free
+   fun:free_list
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 19 errors in context 7 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x10A20C: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C3A: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:free_list
+   fun:print_files
+   fun:main
+}
+==13816== 
+==13816== 19 errors in context 8 of 8:
+==13816== Invalid read of size 8
+==13816==    at 0x109B9F: l_flag_print (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C2E: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Address 0x4a606c8 is 8 bytes inside a block of size 16 free'd
+==13816==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x10A21F: free_list (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x10A1B6: r_st_lst (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109C1D: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==  Block was alloc'd at
+==13816==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13816==    by 0x109EF9: arg_store (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109BDD: print_files (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816==    by 0x109595: main (in /home/jfire/Documents/ft_ls/ft_ls)
+==13816== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:l_flag_print
+   fun:print_files
+   fun:main
+}
+==13816== ERROR SUMMARY: 110 errors from 8 contexts (suppressed: 0 from 0)

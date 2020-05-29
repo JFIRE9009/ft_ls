@@ -37,4 +37,4 @@ fclean: clean
 	make -C "./libft" fclean
 	rm -f $(NAME)
 
-re: clean all
+re: fclean all

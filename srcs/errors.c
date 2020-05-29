@@ -41,14 +41,23 @@ DIR    *error_check(int max, char **args)
             if (check_file_exists(args[i]) == 0)
             {
                 if (args[i][0] != '-')
+                {
+                    closedir(dir);
                     no_file_error(args[i]);
+                }
                 dir = opendir(".");
             }
             else
+            {
+                closedir(dir);
                 print_option(max, args, i);
+            }
         }
         else
+        {
+            closedir(dir);
             dir = opendir(args[i]);
+        }
         i++;
     }
     return (dir);

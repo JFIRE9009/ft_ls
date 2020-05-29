@@ -56,5 +56,6 @@ void				add_empty_list(t_link *lst);
 void				add_at_end(char *path, t_link *store);
 void				no_file_error(char *s);
 void				unrecognized_option_error(char c);
+void				free_list(t_link *list);
 
 #endif

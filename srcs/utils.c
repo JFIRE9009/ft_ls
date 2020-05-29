@@ -26,15 +26,13 @@ void	indent_print(int indent)
  
 void	free_list(t_link *list)
 {
-	t_link		*head;
+	t_link *traverse;
 
-	head = list;
-	while (head != NULL)
+	while(list)
 	{
-		free(head->data);
-		head = head->next;
-		free(list);
-		list = head;
+		traverse = list;
+		list = list->next;
+		free(traverse);
 	}
 }
 
@@ -79,7 +77,11 @@ int 	check_file_exists(char *filename)
 	while ((entry = readdir(dir)) != NULL)
 	{
 		if (ft_strcmp(filename, entry->d_name) == 0)
+		{
+			closedir(dir);
 			return (1);
+		}
 	}
+	closedir(dir);
 	return (0);
 }

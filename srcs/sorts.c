@@ -104,4 +104,5 @@ void	r_st_lst(t_link **head)
 	}
 	*head = former;
 	(*head) = (*head)->next;
+	free_list(former);
 }

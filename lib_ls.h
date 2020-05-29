@@ -49,7 +49,6 @@ void				print_files(DIR *dir, t_link *store, struct dirent *entry, int flags);
 void				rec_flag(char *folder, int indent, int flags);
 void				no_flags(DIR *dir, t_link *store, struct dirent *entry);
 void				a_flag_print(t_link *result, int flags);
-// void				l_flag_print(char *path, t_link *result, int flags);
 void				l_flag_print(t_link *result, int flags);
 void				no_flag_print(t_link *result);
 void				add_empty_list(t_link *lst);

@@ -27,7 +27,7 @@ void rec_flag(char *folder, int indent, int flags)
             if (entry->d_name[0] == '.')
                 continue;
 			path = path_join(folder, entry->d_name);
-			ft_putendl(ft_strjoin("./", entry->d_name));
+			ft_putendl(ft_strjoin_free("./", entry->d_name));
 			indent_print(indent);
             rec_flag(path, indent + 2, flags);
 		}
@@ -37,6 +37,7 @@ void rec_flag(char *folder, int indent, int flags)
 			ft_putendl(entry->d_name);
 		}
 	}
+	ft_strdel(&path);
 	closedir(dir);
 }
 

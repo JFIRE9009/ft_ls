@@ -64,8 +64,15 @@ void	add_empty_list(t_link *lst)
 
 char    *path_join(char *str, char *str2)
 {
-    str = ft_strjoin(str, "/");
-    return(ft_strjoin(str, str2));
+	char *tmp;
+	char *j;
+
+	tmp = ft_strjoin_free(str, str2);
+	j = strdup(tmp);
+	free(tmp);
+	tmp = ft_strjoin_free(j, "/");
+	free(j);
+	return (tmp);
 }
 
 int 	check_file_exists(char *filename)

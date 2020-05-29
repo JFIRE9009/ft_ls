@@ -31,7 +31,7 @@ int		main(int argc, char **argv)
 	if (!BIT_ACTIVE(flags, COMP('R')))
 		print_files(dir, store, sd, flags);
 	else
-		rec_flag(".", 0, flags);
+		rec_flag("./", 0, flags);
 	closedir(dir);
 	return (0);
 }

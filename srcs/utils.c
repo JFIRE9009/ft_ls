@@ -67,10 +67,10 @@ char    *path_join(char *str, char *str2)
 	char *tmp;
 	char *j;
 
-	tmp = ft_strjoin_free(str, str2);
+	tmp = ft_strjoin(str, "/");
 	j = strdup(tmp);
 	free(tmp);
-	tmp = ft_strjoin_free(j, "/");
+	tmp = ft_strjoin(j, str2);
 	free(j);
 	return (tmp);
 }
